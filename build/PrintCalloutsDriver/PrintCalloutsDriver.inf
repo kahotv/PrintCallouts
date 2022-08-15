@@ -1,0 +1,37 @@
+[Version] 
+    Signature   = "$Windows NT$" 
+    Class       = WFPCALLOUTS 
+    ClassGuid   = {4ACE8293-0F28-441b-BC00-DF0C8CC6439F}
+    Provider    = %ProviderString% 
+    CatalogFile = PrintCalloutsDriver.cat 
+    DriverVer=04/14/2021,1.6.1.1 
+[SourceDisksNames] 
+    1 = %NetFilterDisk%,,,"" 
+[SourceDisksFiles] 
+    PrintCalloutsDriver.sys = 1,, 
+[DestinationDirs] 
+    DefaultDestDir      = 12 
+    PrintCalloutsDriver.DriverFiles = 12 
+[DefaultInstall] 
+    OptionDesc = %NetFilterServiceDesc% 
+    CopyFiles  = PrintCalloutsDriver.DriverFiles 
+[DefaultInstall.Services] 
+    AddService = %NetFilterServiceName%,,PrintCalloutsDriver.Service 
+[DefaultUninstall] 
+    DelFiles = PrintCalloutsDriver.DriverFiles 
+[DefaultUninstall.Services] 
+    DelService = %NetFilterServiceName%,0x200 
+[PrintCalloutsDriver.DriverFiles] 
+    PrintCalloutsDriver.sys,,,0x00000040 
+[PrintCalloutsDriver.Service] 
+    DisplayName   = %NetFilterServiceName% 
+    Description   = %NetFilterServiceDesc% 
+    ServiceType   = 1 
+    StartType     = 3 
+    ErrorControl  = 1 
+    ServiceBinary = %12%\PrintCalloutsDriver.sys 
+[Strings] 
+    ProviderString       = "Copyright (C) 2021" 
+    NetFilterDisk        = "Network Traffic Callout Filter Driver  Installation Disk" 
+    NetFilterServiceDesc = "Network Traffic Callout Filter Driver " 
+    NetFilterServiceName = "PrintCalloutsDriver" 
